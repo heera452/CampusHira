@@ -6,8 +6,10 @@ from sentence_transformers import SentenceTransformer
 # Load embedding model
 embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
 
+
 # Connect to ChromaDB
 client = chromadb.PersistentClient(path="rag/vectorstore")
+
 
 # Get CampusHira documents
 collection = client.get_collection(
@@ -27,6 +29,7 @@ def ask_ai_assistant(question: str, student_context: str = ""):
     )
 
     documents = results["documents"][0]
+    metadatas = results["metadatas"][0]
 
     # Combine retrieved documents
     context = "\n\n".join(documents)
@@ -52,6 +55,9 @@ Rules:
 - Use the provided college information and student information.
 - If the requested information is not available, say that the information is not available.
 - Do not invent student information.
+- When student information is available, use it to give personalized answers.
+- When college policy information is available, use it to explain the relevant policy.
+- If both student information and college information are relevant, combine them.
 """
 
     # Ask Gemini
@@ -60,11 +66,17 @@ Rules:
     # Determine sources
     sources = []
 
+    # Student information came from ERP database
     if student_context.strip():
         sources.append("ERP Database")
 
-    if documents:
-        sources.append("attendance_policy.txt")
+    # Get actual document sources from ChromaDB
+    for metadata in metadatas:
+
+        source = metadata.get("source")
+
+        if source and source not in sources:
+            sources.append(source)
 
     return {
         "question": question,
