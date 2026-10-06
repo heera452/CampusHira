@@ -15,3 +15,11 @@ frontend/dist/
 # IDE
 .vscode/
 .idea/
+
+# MLflow generated files
+backend/mlflow.db
+backend/mlartifacts/
+mlflow.db
+mlartifacts/
+# RAG generated vector store
+backend/rag/vectorstore/

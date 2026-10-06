@@ -5,6 +5,8 @@ import {
   CalendarDays,
   Bell,
   Bot,
+  Brain,
+  Calculator,
   User,
   Settings,
   LogOut,
@@ -34,34 +36,76 @@ function Sidebar() {
       {/* Menu */}
       <nav className="flex-1 space-y-1 p-3">
 
-        <button className="flex w-full items-center gap-3 rounded-xl bg-blue-50 px-4 py-3 text-sm font-medium text-blue-600">
+        {/* Dashboard */}
+        <button
+          onClick={() => window.location.href = "/dashboard"}
+          className="flex w-full items-center gap-3 rounded-xl bg-blue-50 px-4 py-3 text-sm font-medium text-blue-600"
+        >
           <LayoutDashboard size={19} />
           Dashboard
         </button>
 
-        <button className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm text-slate-600 hover:bg-slate-50">
+        {/* Attendance */}
+        <button
+          onClick={() => window.location.href = "/attendance"}
+          className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm text-slate-600 hover:bg-slate-50"
+        >
           <CalendarCheck size={19} />
           Attendance
         </button>
 
-        <button className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm text-slate-600 hover:bg-slate-50">
+        {/* Marks */}
+        <button
+          onClick={() => window.location.href = "/marks"}
+          className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm text-slate-600 hover:bg-slate-50"
+        >
           <GraduationCap size={19} />
           Marks
         </button>
 
-        <button className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm text-slate-600 hover:bg-slate-50">
+        {/* Timetable */}
+        <button
+          onClick={() => window.location.href = "/timetable"}
+          className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm text-slate-600 hover:bg-slate-50"
+        >
           <CalendarDays size={19} />
           Timetable
         </button>
 
-        <button className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm text-slate-600 hover:bg-slate-50">
+        {/* Notices */}
+        <button
+          onClick={() => window.location.href = "/notices"}
+          className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm text-slate-600 hover:bg-slate-50"
+        >
           <Bell size={19} />
           Notices
         </button>
 
-        <button className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm text-slate-600 hover:bg-slate-50">
+        {/* AI Assistant */}
+        <button
+          onClick={() => window.location.href = "/ai-assistant"}
+          className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm text-slate-600 hover:bg-slate-50"
+        >
           <Bot size={19} />
           AI Assistant
+        </button>
+
+        {/* Digital Twin */}
+        <button
+          onClick={() => window.location.href = "/digital-twin"}
+          className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm text-slate-600 hover:bg-slate-50"
+        >
+          <Brain size={19} />
+          Digital Twin
+        </button>
+
+        {/* What-If Simulator */}
+        <button
+          onClick={() => window.location.href = "/what-if"}
+          className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm text-slate-600 hover:bg-slate-50"
+        >
+          <Calculator size={19} />
+          What-If Simulator
         </button>
 
       </nav>
@@ -69,17 +113,31 @@ function Sidebar() {
       {/* Bottom menu */}
       <div className="space-y-1 border-t border-slate-200 p-3">
 
-        <button className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm text-slate-600 hover:bg-slate-50">
+        {/* Profile */}
+        <button
+          onClick={() => window.location.href = "/profile"}
+          className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm text-slate-600 hover:bg-slate-50"
+        >
           <User size={19} />
           Profile
         </button>
 
-        <button className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm text-slate-600 hover:bg-slate-50">
+        {/* Settings */}
+        <button
+          className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm text-slate-600 hover:bg-slate-50"
+        >
           <Settings size={19} />
           Settings
         </button>
 
-        <button className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm text-red-500 hover:bg-red-50">
+        {/* Logout */}
+        <button
+          onClick={() => {
+            localStorage.removeItem("access_token");
+            window.location.href = "/login";
+          }}
+          className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm text-red-500 hover:bg-red-50"
+        >
           <LogOut size={19} />
           Logout
         </button>

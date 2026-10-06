@@ -2,6 +2,8 @@ from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
 
 from app.core.config import settings
+from app.db.base import Base
+from app.db import models
 
 
 engine = create_engine(
@@ -22,6 +24,10 @@ def check_database_connection():
         connection.execute(text("SELECT 1"))
 
     return True
+
+
+def create_tables():
+    Base.metadata.create_all(bind=engine)
 
 
 def get_db():
